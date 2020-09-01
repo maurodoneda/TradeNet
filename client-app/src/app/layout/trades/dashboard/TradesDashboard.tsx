@@ -1,4 +1,4 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { Grid } from "semantic-ui-react";
 import { ITrade } from "../../../../app/models/trade";
 import { TradesList } from "./TradesList";
@@ -14,7 +14,9 @@ interface IProps {
 	setSelectedTrade: (trade: ITrade | null) => void;
 	createTrade: (trade: ITrade) => void;
 	editTrade: (trade: ITrade) => void;
-	deleteTrade: (id: string) => void;
+	deleteTrade: (e:SyntheticEvent<HTMLButtonElement>, id: string) => void;
+	submitting: boolean, 
+	target: string
 }
 
 export const TradesDashboard: React.FC<IProps> = ({
@@ -27,6 +29,8 @@ export const TradesDashboard: React.FC<IProps> = ({
 	createTrade,
 	editTrade,
 	deleteTrade,
+	submitting,
+	target
 }) => {
 	return (
 		<Grid>
@@ -35,6 +39,8 @@ export const TradesDashboard: React.FC<IProps> = ({
 					trades={trades}
 					selectTrade={selectTrade}
 					deleteTrade={deleteTrade}
+					submitting={submitting}
+					target = {target}
 				/>
 			</Grid.Column>
 			<Grid.Column width={6}>
@@ -53,6 +59,7 @@ export const TradesDashboard: React.FC<IProps> = ({
 						selectedTrade={selectedTrade!}
 						createTrade={createTrade}
 						editTrade={editTrade}
+						submitting={submitting}
 					/>
 				)}
 			</Grid.Column>

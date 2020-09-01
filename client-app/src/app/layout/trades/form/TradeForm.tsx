@@ -8,6 +8,7 @@ interface IProps {
 	selectedTrade: ITrade;
 	createTrade: (trade: ITrade) => void;
 	editTrade: (trade: ITrade) => void;
+	submitting: boolean;
 }
 
 export const TradeForm: React.FC<IProps> = ({
@@ -15,6 +16,7 @@ export const TradeForm: React.FC<IProps> = ({
 	selectedTrade,
 	createTrade,
 	editTrade,
+	submitting
 } ) => {
 	const initializeForm = () => {
 		if (selectedTrade) {
@@ -99,7 +101,7 @@ export const TradeForm: React.FC<IProps> = ({
 					value={trade.market}
 				/>
 				<Button.Group widths={2}>
-					<Button floated="left" positive type="submit" content="Submit" />
+					<Button loading={submitting} floated="left" positive type="submit" content="Submit" />
 					<Button
 						onClick={() => setEditMode(false)}
 						type="button"
