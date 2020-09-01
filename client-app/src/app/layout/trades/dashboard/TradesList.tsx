@@ -3,10 +3,12 @@ import { Item, Button, Label, Segment } from "semantic-ui-react";
 import { ITrade } from "../../../models/trade";
 
 interface IProps {
-	trades: ITrade[];
+    trades: ITrade[];
+	selectTrade: (id: string) => void;
+	deleteTrade: (id: string) => void;  
 }
 
-export const TradesList: React.FC<IProps> = ({trades}) => {
+export const TradesList: React.FC<IProps> = ({trades, selectTrade, deleteTrade}) => {
 	return (
 		<Segment clearing>
 			<Item.Group divided>
@@ -20,10 +22,11 @@ export const TradesList: React.FC<IProps> = ({trades}) => {
 								<div>{trade.asset}, {trade.market}</div>
 							</Item.Description>
 							<Item.Extra>
-								<Button floated="right" content="View" color="blue" />
+								<Button onClick={()=> selectTrade(trade.id)} floated="right" content="View" color="blue" />
+								<Button onClick={()=> deleteTrade(trade.id)} floated="right" content="Delete" color="red" />
 								<Label basic content= {trade.type} />
 							</Item.Extra>
-						</Item.Content>
+						</Item.Content> 
 					</Item>
 				))}
 			</Item.Group>

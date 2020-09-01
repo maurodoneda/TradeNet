@@ -4,7 +4,7 @@ export interface ITrade{
     description: string;
     type: string;
     asset: string;
-    date: Date;
+    date: string;
     market: string;
     numberOfLikes: number;
     numberOfDislikes: number;
